@@ -1,0 +1,22 @@
+<script>
+    import { Combat } from './combat';
+
+    const CombatInstance = new Combat();
+</script>
+<div class="grid grid-cols-2 gap-4 h-80">
+    <div id="player" class="bg-gray-800 flex justify-start">
+        137x320 player
+    </div>
+    <div id="enemy" class="bg-gray-800 flex justify-end">
+        137x320 enemy
+    </div>
+</div>
+
+<div class="mt-4 grid grid-rows-2 gap-4 md:grid-cols-2 min-h-40">
+    <div id="actions" class="py-1 px-2 bg-gray-800 order-2 md:order-1 ">
+            </div>
+
+    <div id="log" class="py-2.5 px-5 bg-gray-800 order-1 md:order-2">
+        logs
+    </div>
+</div>

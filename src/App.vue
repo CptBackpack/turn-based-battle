@@ -7,7 +7,7 @@ import { RouterView } from "vue-router";
 
 export default {
   mounted(){
-    console.log(import.meta.env.VITE_FOO);
+    console.log(import.meta.env);
     document.title = "Home " + import.meta.env.VITE_APP_TITLE;
   }
 }
@@ -15,7 +15,7 @@ export default {
 
 <template>
   <Navigation />
-  <div class="mt-20 mx-auto w-3/4">
+  <div class="mx-auto mt-20 w-3/4">
     <RouterView />
   </div>
 </template>

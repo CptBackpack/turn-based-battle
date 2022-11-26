@@ -6,7 +6,7 @@ import { RouterLink } from "vue-router";
 
 <template>
   <div class="bg-slate-700">
-    <nav class="fixed w-full bottom-0 md:bottom-auto md:top-0">
+    <nav class="fixed w-full bottom-auto top-0">
       <div class="bg-gray-900">
         <div class="px-4 py-5 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8">
           <div class="relative flex items-center justify-between">
@@ -23,7 +23,12 @@ import { RouterLink } from "vue-router";
                   <RouterLink to = "/about" class="font-medium tracking-wide text-gray-100 transition-colors duration-200 hover:text-teal-accent-400" href="#">
                     About
                   </RouterLink>
-                </li>            
+                </li>    
+                <li class="">
+                  <RouterLink to="/combat" class="font-medium tracking-wide text-gray-100 transition-colors duration-200 hover:text-teal-accent-400" href="#">
+                    Combat
+                  </RouterLink>
+                </li>
               </ul>
             </div>
           </div>
