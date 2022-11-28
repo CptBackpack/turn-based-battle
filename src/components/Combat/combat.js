@@ -1,18 +1,15 @@
 import $ from 'jquery';
 import PlayerImageSource from '../../assets/tbb/player.jpg';
 import EnemyImageSource from '../../assets/tbb/enemy.jpg';
-import ActionButton from './ui/button';
-
 export class Combat {
     constructor() {
         
     }
 
-    setup (combatInstance) {
-        this.combatInstance = combatInstance;
+    setup () {
         getElements(this);
         fillImages(this);
-        makeCommands(this, this.combatInstance);
+        return getCommands();
 
         function getElements(parent)
         {
@@ -31,17 +28,30 @@ export class Combat {
             parent.enemyElement.html(enemyImage);
         }
 
-        function makeCommands(parent, combatInstance)
+        function getCommands()
         {
             let dummyCommands = [
                 {
+                    'id': 0,
                     'type': 'normal',
                     'range': 'melee',
                     'damage': '5-10', 
                     'name': 'Slash',
-                    'action': "new Combat().action('normal')",
+                    'action': "action('normal')",
                 },
                 {
+                    'id': 1,
+                    'type': 'normal',
+                    'range': 'melee',
+                    'damage': '5-10', 
+                    'name': 'Shield Bash',
+                    'action': "action('normal')",
+                },
+                {
+                    'id': 'break',
+                },
+                {
+                    'id': 2,
                     'type': 'fire',
                     'range': 'ranged',
                     'damage': '1-20',
@@ -49,6 +59,7 @@ export class Combat {
                     'action': "this.action('normal')",
                 },
                 {
+                    'id': 3,
                     'type': 'ice',
                     'range': 'ranged',
                     'damage': '7-15',
@@ -56,6 +67,7 @@ export class Combat {
                     'action': "this.action('normal')",
                 },
                 {
+                    'id': 4,
                     'type': 'earth',
                     'range': 'ranged',
                     'damage': '1-20',
@@ -63,6 +75,7 @@ export class Combat {
                     'action': "this.action('normal')",
                 },
                 {
+                    'id' : 5,
                     'type': 'lightning',
                     'range': 'ranged',
                     'damage': '1-20',
@@ -71,27 +84,16 @@ export class Combat {
                 }
             ];
 
-            let commandsHtml = '';
-
-            dummyCommands.forEach((item) => {
-                // console.table(item);
-                commandsHtml += ActionButton(item['name'], item['type'], item['damage'], item['action'], combatInstance);
-            });
-
-            parent.actionsElement.html(
-                commandsHtml
-            )
+            return dummyCommands;
         }
     }
 
 
     action(type)
     {
-        // return {
-        //     'log' : ['Player deals 10 damage.', 'Enemy deals 5 damage'],
-        // }
-
-        console.log(type);
+        return {
+            'log' : ['Player deals 10 ' + type + ' damage.', 'Enemy deals 5 damage'],
+        }
     }
 
 }
