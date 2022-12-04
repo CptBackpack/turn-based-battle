@@ -1,22 +1,46 @@
 <script setup>
 import Navigation from "./components/NavigationComponent.vue";
 import { RouterView } from "vue-router";
+import { useStore } from 'vuex'
+
 </script>
 
 <script>
+import EventBus from "./common/EventBus";
 
 export default {
-  mounted(){
-    console.log(import.meta.env);
-    document.title = "Home " + import.meta.env.VITE_APP_TITLE;
-  }
+	data() {
+		{
+			return {
+				isUserLoggedIn: false,
+			}
+		}
+	},
+
+	mounted() {
+		EventBus.on("logout", () => {
+			this.logOut();
+		});
+	},
+
+	beforeUnmount() {
+		EventBus.dispatch("logout");
+	},
+
+	methods: {
+		logOut() {
+			this.$store.dispatch('auth/logout');
+			this.$router.push('/home');
+		}
+	},
+	
 }
 </script>
 
 <template>
-  <Navigation />
-  <div class="mx-auto mt-20 w-3/4">
-    <RouterView />
-  </div>
+	<Navigation />
+	<div class="mx-auto mt-20 w-3/4">
+		<RouterView />
+	</div>
 </template>
 

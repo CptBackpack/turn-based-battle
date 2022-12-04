@@ -2,6 +2,12 @@ import $ from 'jquery';
 import PlayerImageSource from '../../assets/tbb/player.jpg';
 import EnemyImageSource from '../../assets/tbb/enemy.jpg';
 export class Combat {
+
+    actionsElement;
+    logElement;
+    playerElement;
+    enemyElement;
+
     constructor() {
         
     }

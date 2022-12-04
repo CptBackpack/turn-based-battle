@@ -1,3 +1,21 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@font-face {
+    font-family: 'headers';
+    src: url('../fonts/julius.ttf');
+}
+
+@font-face {
+    font-family: 'default';
+    src: url('../fonts/quicksand.ttf');
+}
+
+body {
+    font-family: 'default' !important;
+}
+
+h1, h2, h3, h4, h5 {
+    font-family: 'headers' !important;
+}
