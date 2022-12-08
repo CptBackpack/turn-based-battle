@@ -1,21 +1,24 @@
 import api from './api';
 
 class UserService {
-  getPublicContent() {
-    return api.get('/test/all');
-  }
+	getUserDetails(accessToken) {
+		const params = new URLSearchParams([['accessToken', accessToken]]);
+		return api.get('/test', {
+			params
+		});
+	}
 
-  getUserBoard() {
-    return api.get('/test/user');
-  }
+	getUserBoard() {
+		return api.get('/test/user');
+	}
 
-  getModeratorBoard() {
-    return api.get('/test/mod');
-  }
+	getModeratorBoard() {
+		return api.get('/test/mod');
+	}
 
-  getAdminBoard() {
-    return api.get('/test/admin');
-  }
+	getAdminBoard() {
+		return api.get('/test/admin');
+	}
 }
 
 export default new UserService();

@@ -17,11 +17,16 @@ export default {
 		}
 	},
 
-	mounted() {
+	mounted() { 
 		EventBus.on("logout", () => {
 			this.logOut();
 		});
+
+		EventBus.on("testEvent", () => {
+			
+		});
 	},
+ 
 
 	beforeUnmount() {
 		EventBus.dispatch("logout");
@@ -30,7 +35,7 @@ export default {
 	methods: {
 		logOut() {
 			this.$store.dispatch('auth/logout');
-			this.$router.push('/home');
+			this.$router.push('/');
 		}
 	},
 	
@@ -42,5 +47,6 @@ export default {
 	<div class="mx-auto mt-20 w-3/4">
 		<RouterView />
 	</div>
+	<notifications classes="toast-notification"/>
 </template>
 

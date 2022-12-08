@@ -1,34 +1,35 @@
 import api from "./api";
 import TokenService from "./token.service";
-
+import Notification from "../models/Notification";
+import Language from "../config/language";
 class AuthService {
-  login({ email, password }) {
-    return api
-      .post("/auth/signin", {
-        email,
-        password
-      })
-      .then((response) => {
-        if (response.data.accessToken) {;
-          TokenService.setUser(response.data);
-        }
+	login({ username, password }) {
+		return api
+			.post("/auth/login", {
+				username,
+				password
+			})
+			.then((response) => {
+				if (response.data.accessToken) {
+					console.log(response.data.accessToken);
+					TokenService.setUser({accessToken: response.data.accessToken});
+				}
 
-        return response.data;
-      });
-  }
+				return response.data;
+			});
+	}
 
-  logout() {
-    console.log('logout user');
-    TokenService.removeUser();
-  }
+	logout() {
+		TokenService.removeUser();
+	}
 
-  register({ username, email, password }) {
-    return api.post("/auth/signup", {
-      username,
-      email,
-      password
-    });
-  }
+	register({ username, email, password }) {
+		return api.post("/auth/signup", {
+			username,
+			email,
+			password
+		});
+	}
 }
 
 export default new AuthService();

@@ -1,6 +1,7 @@
 <script setup>
 import { RouterLink } from "vue-router";
-
+import api from "../services/api";
+import EventBus from "../common/EventBus";
 </script>
 
 
@@ -14,36 +15,36 @@ import { RouterLink } from "vue-router";
 									class="text-2xl text-white"></span><span
 									class="ml-2 text-xl font-bold tracking-wide text-gray-100 uppercase hidden md:block"></span></a>
 							<ul class="flex items-center space-x-8">
-								<li class="">
+								<li class="" v-if="!this.loggedIn">
 									<RouterLink to="/"
 										class="font-medium tracking-wide text-gray-100 transition-colors duration-200 hover:text-teal-accent-400"
 										href="#">
 										Home
 									</RouterLink>
 								</li>
-								<li class="">
+								<li class="" v-if="!this.loggedIn">
 									<RouterLink to="/about"
 										class="font-medium tracking-wide text-gray-100 transition-colors duration-200 hover:text-teal-accent-400"
 										href="#">
 										About
 									</RouterLink>
 								</li>
-								<li class="">
+								<li class="" v-if="this.loggedIn">
 									<RouterLink to="/combat"
 										class="font-medium tracking-wide text-gray-100 transition-colors duration-200 hover:text-teal-accent-400"
 										href="#">
 										Combat
 									</RouterLink>
 								</li>
-								<li class="">
-									<RouterLink to="/Profile"
+								<li class="" v-if="this.loggedIn">
+									<RouterLink to="/profile"
 										class="font-medium tracking-wide text-gray-100 transition-colors duration-200 hover:text-teal-accent-400"
 										href="#">
 										Profile
 									</RouterLink>
 								</li>
-								<li class="">
-									<a href = "#" @click="logout">Logout</a>
+								<li class="" v-if="this.loggedIn">
+									<a href="#" @click="logout">Logout</a>
 								</li>
 							</ul>
 						</div>
@@ -61,8 +62,30 @@ export default {
 	},
 	methods: {
 		logout() {
-			this.$store.dispatch('auth/logout');
+			api.get("/auth/logout", {}).then((response) => {
+
+				if (response.data['disconnect'] == 'true') EventBus.dispatch("logout");
+
+				/**
+				 * error => {
+						this.content =
+						(error.response && error.response.data && error.response.data.message) ||
+						error.message ||
+						error.toString();
+
+						if (error.response && error.response.status === 403) {
+						EventBus.dispatch("logout");
+						}
+					}
+				*/
+			});
+
 		}
+	},
+	computed: {
+		loggedIn() {
+			return this.$store.state.auth.status.loggedIn;
+		},
 	},
 }
 </script>

@@ -6,6 +6,8 @@ import UIForm from '../UI/UIFormComponent.vue';
 import UIInput from '../UI/UIInputComponent.vue';
 import UIButton from '../UI/UIButtonComponent.vue';
 
+import Language from "../../config/language";
+import Notification from '../../models/Notification';
 </script>
 
 <template>
@@ -13,17 +15,17 @@ import UIButton from '../UI/UIButtonComponent.vue';
         <li v-for="field in formFields" :key="field.id" class="inline">
             <UIInput :text="field.text" :type="field.type" :id="((field.id) + '-' + formId)" />
         </li>
-        <UIButton text="Login" type="normal" submit />
+        <UIButton :text="Language.get('Login')" type="normal" submit />
     </UIForm>
 </template>
 
 <script>
 const formFields = [
     {
-        'text': 'Email',
-        'name': 'email',
+        'text': 'Username',
+        'name': 'Username',
         'type': 'text',
-        'id': 'email',
+        'id': 'username',
     },
     {
         'text': 'Password',
@@ -43,7 +45,7 @@ const formFields = [
  * 
  * to easily access with this.fields.email.input.val() // for example
  */
-import User from '../../models/User';
+import NewAccount from '../../models/NewAccount';
 
 export default {
     data() {
@@ -57,7 +59,9 @@ export default {
     },
 
     created() {
-        this.formName = 'Login';
+
+        console.log();
+        this.formName = Language.get('LoginFormText');
         this.formElement = $('#' + this.formId);
     },
 
@@ -73,26 +77,27 @@ export default {
             this.getElements();
             this.loading = true;
 
-            // if (false) {
-            //     this.loading = false;
-            //     return;
-            // }
+            const account = new NewAccount(this.fields['username'].input.val(), '', this.fields['password'].input.val());
 
-            const NewAccount = new User('', this.fields['email'].input.val(), this.fields['password'].input.val());
-            if (NewAccount.email && NewAccount.password) {
-                this.$store.dispatch('auth/login', NewAccount).then(
-                    () => {
-                        this.$router.push('/combat');
-                    },
-                    error => {
-                        this.loading = false;
-                        this.message =
-                            (error.response && error.response.data) ||
-                            error.message ||
-                            error.toString();
-                    }
-                );
-            }
+            if (!account.validate()) {
+                return;
+            } 
+
+
+            this.$store.dispatch('auth/login', account).then(
+                () => { // response not used
+                    new Notification(Language.get('LoginSuccess'), Notification.Types.Success);
+                    this.$router.push('/profile');
+                },
+                error => {                    
+					new Notification(JSON.parse(error.request.response)['message'], Notification.Types.Error);
+                    this.loading = false;
+                    this.message =
+                        (error.response && error.response.data) ||
+                        error.message ||
+                        error.toString();
+                }
+            );
 
         },
         getElements() {

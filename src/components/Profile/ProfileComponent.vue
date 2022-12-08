@@ -1,9 +1,5 @@
 <script setup>
 import 'remixicon/fonts/remixicon.css';
-import api from "../../services/api";
-
-import EventBus from "../../common/EventBus";
-
 </script>
 
 
@@ -18,25 +14,20 @@ import EventBus from "../../common/EventBus";
 
 export default {
     mounted: function () {
-        api.get("/test", {}).then((response) => {
-            // console.log(response);
-            console.log(response.data);
-
-            if(response.data['disconnect'] == 'true') EventBus.dispatch("logout");
-        });
-
-        /**
-         * error => {
-                this.content =
-                (error.response && error.response.data && error.response.data.message) ||
-                error.message ||
-                error.toString();
-
-                if (error.response && error.response.status === 403) {
-                EventBus.dispatch("logout");
+        this.$store.dispatch('user/getData').then(
+                () => {
+                    // TODO : this is for profile   
+ 
+                },
+                error => {
+                    console.log('error');
+                    this.loading = false;
+                    this.message =
+                        (error.response && error.response.data) ||
+                        error.message ||
+                        error.toString();
                 }
-            }
-         */
+            );
     },
     methods: {
 

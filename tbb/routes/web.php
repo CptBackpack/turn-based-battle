@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Http\Request;
+
 /** @var \Laravel\Lumen\Routing\Router $router */
 
 /*
@@ -18,17 +20,66 @@ $router->get('/', function () use ($router) {
 });
 
 
-$router->get('/test', function() {
-    return response()->json(['nice' => 'very', 'disconnect' => 'true'], 200);
+$router->get('/test', function () {
+    return response()->json(['nice' => 'very'], 401);
 });
 
-$router->post('/auth/signin', function () {
+$router->post('/auth/login', function (Request $request) {
     // 401 not auth
     // 200 ok
-    return response()->json(['accessToken' => 'tZiKxFKDcn'], 200);
+
+    $username = $request['username'];
+    $password = $request['password'];
+
+    $returnObject = [
+        'message' => '',
+        'status' => 401,
+        'accessToken' => false,
+    ];
+
+    // check if fields are empty
+    if (empty($password) || empty($username)) {
+        $returnObject['message'] = 'Empty fields';
+        return response()->json(
+            [
+                'message' => $returnObject['message'],
+                'accessToken' => $returnObject['accessToken'],
+            ],
+            $returnObject['status']
+        );
+    }
+
+
+    // check if account is the right one
+    if (
+        $username != 'admin' ||
+        $password != 'admin'
+    ) {
+        $returnObject['message'] = 'Invalid credentials';
+        return response()->json(
+            [
+                'message' => $returnObject['message'],
+                'accessToken' => $returnObject['accessToken'],
+            ],
+            $returnObject['status']
+        );
+    }
+
+
+    // all good. generate token and log user in
+    $returnObject['message'] = 'Login successful!';
+    $returnObject['accessToken'] = "a3704863b7fb";
+    $returnObject['status'] = 200;
+    return response()->json(
+        [
+            'message' => $returnObject['message'],
+            'accessToken' => $returnObject['accessToken'],
+        ],
+        $returnObject['status']
+    );
 });
 
 
-$router->post('/logout', function() {
-    return response()->json(['logout' => 'yes'], 200);
+$router->get('auth/logout', function () {
+    return response()->json(['disconnect' => 'true'], 200);
 });

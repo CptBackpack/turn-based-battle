@@ -29,7 +29,7 @@ export default {
 <template>
     <div :id = "this.id" class = "my-4">
         <label class="block text-[#ffffff]" for="email">{{ this.text }}</label>
-        <input :type="type" :placeholder="text"
+        <input :type="type" :placeholder="text" :name = "text"
             class="w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-blue-600">
         <span class="text-xs tracking-wide text-red-600" :id = "this.id + '-error-text'" >{{ this.text }} field is required </span>
     </div>

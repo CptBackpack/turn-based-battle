@@ -14,6 +14,8 @@ class TokenService {
 	updateLocalAccessToken(token) {
 		let user = JSON.parse(localStorage.getItem(import.meta.env.VITE_STORAGE_KEY));
 		user.accessToken = token;
+
+		console.log('new token: ' + token);
 		localStorage.setItem(import.meta.env.VITE_STORAGE_KEY, JSON.stringify(user));
 	}
 

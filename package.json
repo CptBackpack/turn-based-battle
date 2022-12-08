@@ -9,6 +9,7 @@
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore"
   },
   "dependencies": {
+    "@kyvg/vue3-notification": "^2.7.0",
     "axios-auth-refresh": "^3.3.4",
     "jquery": "^3.6.1",
     "remixicon": "^2.5.0",

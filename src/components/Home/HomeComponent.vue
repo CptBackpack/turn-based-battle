@@ -4,13 +4,13 @@ import 'remixicon/fonts/remixicon.css';
 import Login from './LoginComponent.vue';
 import Register from './RegisterComponent.vue';
 
-import UserService from '../../services/user.service';
-import EventBus from "../../common/EventBus";
+import Language from "../../config/language";
+
 </script>
 
 
 <template>
-	<div class="grid grid-cols-1 md:grid-cols-6 gap-8 justify-items-center md:justify-items-start" v-if="!this.loggedIn">
+	<div class="grid grid-cols-1 md:grid-cols-6 gap-0 md:gap-8 justify-items-center sm:justify-items-start">
 		<div class="order-2 col-span-4 md:order-1">
 			<h1 class="mb-5 font-bold text-2xl">Lorem ipsum</h1>
 			<p>
@@ -54,9 +54,9 @@ import EventBus from "../../common/EventBus";
 				vel consequat felis ornare et. Sed in elit tellus.
 			</p>
 		</div>
-		<div class="order-1 col-span-2 min-w-full md:order-2">
-			<Login @logIn = "logUserIn" />
-			<Register @register = "register" />
+		<div class="order-1 col-span-2 w-full md:order-2">
+			<Login id = "login"/>
+			<Register id = "register"/>
 		</div>
 	</div>
 </template>
@@ -72,22 +72,11 @@ export default {
     },
 
     created() {	
-		localStorage.clear();
-		this.isUserLogged();
     },
 
 	updated(){
-		this.isUserLogged();
 	},
     methods: {
-		logUserIn(fields) {
-			this.$store.dispatch('auth/login');
-		},
-
-		register(fields) {
-			console.log(fields);
-		},
-
 		isUserLogged() {
 
 		},

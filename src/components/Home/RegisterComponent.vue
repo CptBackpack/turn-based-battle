@@ -8,7 +8,7 @@ import UIButton from '../UI/UIButtonComponent.vue';
 </script>
 
 <template>
-    <UIForm :text="formName" :id="formId + '-form'" @submit="onSubmit">
+    <UIForm :text="formName" :id="formId" @submit="onSubmit">
         <li v-for="field in formFields" :key="field.id" class="inline">
             <UIInput :text="field.text" :type="field.type" :id="((field.id) + '-' + formId)" />
         </li>
@@ -17,7 +17,13 @@ import UIButton from '../UI/UIButtonComponent.vue';
 </template>
 
 <script>
-const formFields = [
+const formFields = [    
+    {
+        'text': 'Username',
+        'name': 'Username',
+        'type': 'text',
+        'id': 'username',
+    },
     {
         'text': 'Email',
         'name': 'email',
