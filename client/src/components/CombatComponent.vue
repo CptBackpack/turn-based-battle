@@ -7,27 +7,29 @@ import UIButton from "./UI/UIButtonComponent.vue";
 
 
 <template>
-	<div class="grid grid-cols-2 gap-4 h-80">
-		<div id="player" class="bg-gray-800 flex justify-start">
-			137x320 player
-		</div>
-		<div id="enemy" class="bg-gray-800 flex justify-end">
-			137x320 enemy
-		</div>
-	</div>
-
-	<div class="mt-4 grid grid-rows-2 gap-4 md:grid-cols-2 min-h-40">
-		<div id="actions" class="py-1 px-2 bg-gray-800 order-2 md:order-1">
-			<ul class="list-none">
-				<li v-for="item in commands" :key="item.id" class="inline">
-					<UIButton :text="item.name" :type="item.type" @click="this.action(item.type)"
-						v-if="item.id != 'break'" />
-					<br v-if="item.id == 'break'" />
-				</li>
-			</ul>
+	<div class ="p-0 m-0">
+		<div class="grid grid-cols-2 gap-4 h-80">
+			<div id="player" class="bg-gray-800 flex justify-start">
+				137x320 player
+			</div>
+			<div id="enemy" class="bg-gray-800 flex justify-end">
+				137x320 enemy
+			</div>
 		</div>
 
-		<div id="log" class="py-2.5 px-5 bg-gray-800 order-1 md:order-2 max-h-28 overflow-y-scroll">
+		<div class="mt-4 grid grid-rows-2 gap-4 md:grid-cols-2 min-h-40">
+			<div id="actions" class="py-1 px-2 bg-gray-800 order-2 md:order-1">
+				<ul class="list-none">
+					<li v-for="item in commands" :key="item.id" class="inline">
+						<UIButton :text="item.name" :type="item.type" @click="this.action(item.type)"
+							v-if="item.id != 'break'" />
+						<br v-if="item.id == 'break'" />
+					</li>
+				</ul>
+			</div>
+
+			<div id="log" class="py-2.5 px-5 bg-gray-800 order-1 md:order-2 max-h-28 overflow-y-scroll">
+			</div>
 		</div>
 	</div>
 </template>

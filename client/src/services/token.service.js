@@ -1,10 +1,9 @@
+/** 
+ * This file describes the functionality that is used for the User
+ */
+
 class TokenService {
 	key = 'TBBUserTokenKeyValue';
-
-	getLocalRefreshToken() {
-		const user = JSON.parse(localStorage.getItem(import.meta.env.VITE_STORAGE_KEY));
-		return user?.refreshToken;
-	}
 
 	getLocalAccessToken() {
 		const user = JSON.parse(localStorage.getItem(import.meta.env.VITE_STORAGE_KEY));
@@ -15,7 +14,6 @@ class TokenService {
 		let user = JSON.parse(localStorage.getItem(import.meta.env.VITE_STORAGE_KEY));
 		user.accessToken = token;
 
-		console.log('new token: ' + token);
 		localStorage.setItem(import.meta.env.VITE_STORAGE_KEY, JSON.stringify(user));
 	}
 

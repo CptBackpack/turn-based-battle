@@ -26,7 +26,8 @@ export default {
 </script>
 
 <template>
-    <div class="px-2 py-2">
+    <!-- TODO: do something about px-0 py-0 -->
+    <div class="px-0 py-0">
         <div class="flex justify-center">
         </div>
         <h3 class="text-2xl font-bold text-center"> {{ this.text }} </h3>

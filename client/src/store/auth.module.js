@@ -1,3 +1,8 @@
+/**
+ * This is our path between our Authentication functionality (services/auth.service.js) 
+ * and the rest of our app.
+ */
+
 import AuthService from '../services/auth.service';
 
 const user = JSON.parse(localStorage.getItem('user'));
@@ -21,7 +26,7 @@ export const auth = {
 				}
 			);
 		},
-		logout({ commit }) {
+		logout({ commit }) { 
 			AuthService.logout();
 			commit('logout');
 		},

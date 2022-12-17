@@ -18,7 +18,6 @@ export default class NewAccount {
 	validate() {
 		if (this.username.length < 5) 
 		{
-			console.log(this.username);
 			new Notification('Username error', Notification.Types.Error);
 			return false;
 		}

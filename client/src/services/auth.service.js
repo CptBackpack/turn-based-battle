@@ -1,3 +1,7 @@
+/** 
+ * This file describes the functionality that is used for Authentication
+ */
+
 import api from "./api";
 import TokenService from "./token.service";
 import Notification from "../models/Notification";
@@ -11,7 +15,6 @@ class AuthService {
 			})
 			.then((response) => {
 				if (response.data.accessToken) {
-					console.log(response.data.accessToken);
 					TokenService.setUser({accessToken: response.data.accessToken});
 				}
 

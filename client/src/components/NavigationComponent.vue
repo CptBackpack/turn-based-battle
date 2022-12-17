@@ -65,7 +65,7 @@ export default {
 			api.get("/auth/logout", {}).then((response) => {
 
 				if (response.data['disconnect'] == 'true') EventBus.dispatch("logout");
-
+				this.$router.push('/');
 				/**
 				 * error => {
 						this.content =
@@ -76,7 +76,7 @@ export default {
 						if (error.response && error.response.status === 403) {
 						EventBus.dispatch("logout");
 						}
-					}
+					} 
 				*/
 			});
 

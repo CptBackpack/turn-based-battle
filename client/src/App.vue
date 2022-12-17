@@ -43,10 +43,12 @@ export default {
 </script>
 
 <template>
-	<Navigation />
-	<div class="mx-auto mt-20 w-3/4">
-		<RouterView />
+	<div class = "m-0 p-0">
+		<Navigation />
+		<div class="mx-auto mt-20 w-5/6">
+			<RouterView />
+		</div>
+		<notifications classes="toast-notification"/>
 	</div>
-	<notifications classes="toast-notification"/>
 </template>
 

@@ -21,7 +21,7 @@ $router->get('/', function () use ($router) {
 
 
 $router->get('/test', function () {
-    return response()->json(['nice' => 'very'], 401);
+    return response()->json(['nice' => 'very'], 200);
 });
 
 $router->post('/auth/login', function (Request $request) {
@@ -79,6 +79,14 @@ $router->post('/auth/login', function (Request $request) {
     );
 });
 
+$router->post('/testPost', function() {
+    return response()->json(['nice' => 'very'], 401);
+});
+
+$router->post('/auth/refreshToken', function (Request $request) {
+    $oldToken = $request['refreshToken'];
+    return response()->json(['accessToken' => $oldToken], 200);
+});
 
 $router->get('auth/logout', function () {
     return response()->json(['disconnect' => 'true'], 200);

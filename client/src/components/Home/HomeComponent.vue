@@ -13,7 +13,7 @@ import Language from "../../config/language";
 	<div class="grid grid-cols-1 md:grid-cols-6 gap-0 md:gap-8 justify-items-center sm:justify-items-start">
 		<div class="order-2 col-span-4 md:order-1">
 			<h1 class="mb-5 font-bold text-2xl">Lorem ipsum</h1>
-			<p>
+			<p class = "text-justify">
 				Lorem ipsum dolor sit amet
 				consectetur adipiscing elit. Etiam a magna eu ipsum finibus semper. Vestibulum sed odio a ex pulvinar
 				volutpat. Integer tristique nisi quis ante tempor

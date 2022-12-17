@@ -1,9 +1,21 @@
+/** 
+ * This file describes the functionality that is used for the User
+ */
+
 import api from './api';
+
 
 class UserService {
 	getUserDetails(accessToken) {
 		const params = new URLSearchParams([['accessToken', accessToken]]);
 		return api.get('/test', {
+			params
+		});
+	}
+
+	refreshTest(accessToken) {
+		const params = new URLSearchParams([['accessToken', accessToken]]);
+		return api.post('/testPost', {
 			params
 		});
 	}

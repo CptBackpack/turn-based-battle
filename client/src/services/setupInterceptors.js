@@ -30,8 +30,12 @@ const setup = (store) => {
 					originalConfig._retry = true;
 
 					try {
-						const rs = await axiosInstance.post("/auth/refreshtoken", {
-							refreshToken: TokenService.getLocalRefreshToken(),
+						// if post call fails with unauthorized,
+						// the interceptor will automatically fire a refreshToken call to 
+						// see if current token is expired
+						
+						const rs = await axiosInstance.post("/auth/refreshToken", {
+							refreshToken: TokenService.getLocalAccessToken(),
 						});
 
 						const { accessToken } = rs.data;

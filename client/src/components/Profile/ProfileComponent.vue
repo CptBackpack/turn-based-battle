@@ -28,6 +28,15 @@ export default {
                         error.toString();
                 }
             );
+
+        // this.$store.dispatch('user/refreshTest').then(
+        //     (response) => {
+        //         console.log(response);
+        //     },
+        //     (error) => {
+        //         console.log(object);
+        //     }
+        // );
     },
     methods: {
 

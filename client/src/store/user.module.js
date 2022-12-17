@@ -1,3 +1,8 @@
+/**
+ * This is our path between our User functionality (services/user.service.js) 
+ * and the rest of our app.
+ */
+
 import UserService from '../services/user.service';
 import TokenService from '../services/token.service';
 
@@ -16,6 +21,19 @@ export const user = {
 					return Promise.resolve(error.data);
 				}
 			);
+		},
+		refreshTest({commit}) {
+			let accessToken = TokenService.getLocalAccessToken();
+			
+			return UserService.refreshTest(accessToken).then(
+				response => {
+					commit('refreshTestSuccess');
+					return Promise.resolve(response.data);
+				},
+				error => {
+					return Promise.resolve(error.data);
+				}
+			)
 		}
 	},
 	mutations: {
@@ -23,5 +41,9 @@ export const user = {
 			console.log('got user details');
 			
 		},
+
+		refreshTestSuccess(state) {
+			console.log('refresh good');
+		}
 	}
 };

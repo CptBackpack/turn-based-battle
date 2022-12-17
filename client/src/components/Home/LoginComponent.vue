@@ -59,8 +59,6 @@ export default {
     },
 
     created() {
-
-        console.log();
         this.formName = Language.get('LoginFormText');
         this.formElement = $('#' + this.formId);
     },
@@ -68,9 +66,10 @@ export default {
     computed: {
         loggedIn() {
             return this.$store.state.auth.status.loggedIn;
+            
         }
     },
-
+    
     methods: {
         onSubmit(e) {
             e.preventDefault();

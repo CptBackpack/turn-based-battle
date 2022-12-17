@@ -22,7 +22,6 @@ class ConfigClass {
 
     getUserToken() {
         let UserToken = this.#get(this.key);
-        // console.log(UserToken);
         return UserToken;
     }
 
